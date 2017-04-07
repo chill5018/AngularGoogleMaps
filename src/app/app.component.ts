@@ -36,7 +36,7 @@ export class AppComponent {
       this.markers.push({
         lat: $event.coords.lat,
         lng: $event.coords.lng,
-        draggable: false
+        draggable: true
       });
     }
 
@@ -115,7 +115,7 @@ export class AppComponent {
   		  lat: 51.373858,
   		  lng: 7.215982,
   		  label: 'B',
-  		  draggable: false
+  		  draggable: true
   	  },
   	  {
   		  lat: 51.723858,

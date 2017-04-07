@@ -28,11 +28,14 @@
 
 </sebm-google-map-marker>
 
-<sebm-google-map-polyline *ngIf="isRoute">
+<sebm-google-map-polyline
+ *ngIf="isRoute"
+   [polylineDraggable]="true">
   <sebm-google-map-polyline-point
   *ngFor="let m of tours[0].points; let i = index"
   [latitude]="m.lat"
-  [longitude]="m.lng">
+  [longitude]="m.lng"
+>
 </sebm-google-map-polyline-point>
 </sebm-google-map-polyline>
 
