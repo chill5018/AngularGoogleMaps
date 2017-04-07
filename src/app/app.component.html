@@ -1,3 +1,28 @@
-<h1>
-  {{title}}
-</h1>
+<h1>{{title}}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<sebm-google-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="false"
+      [zoomControl]="false"
+      (mapClick)="mapClicked($event)">
+
+<sebm-google-map-marker
+         *ngFor="let m of markers; let i = index"
+         (markerClick)="clickedMarker(m.label, i)"
+         [latitude]="m.lat"
+         [longitude]="m.lng"
+         [label]="m.label"
+         [markerDraggable]="m.draggable"
+         (dragEnd)="markerDragEnd(m, $event)">
+
+       <sebm-google-map-info-window>
+         <strong>InfoWindow content</strong>
+       </sebm-google-map-info-window>
+
+     </sebm-google-map-marker>
+
+   </sebm-google-map>
