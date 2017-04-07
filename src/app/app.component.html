@@ -52,20 +52,22 @@
 
   <div class="route-markers-container" *ngIf="isEditing">
     <h3>Markers on Map</h3>
+    <p>click on marker in list to remove</p>
     <ul>
       <li *ngFor="let m of markers; let i = index" (click)="deleteMarker(m, i)">Marker {{i}} {{m.label}}</li>
     </ul>
   </div>
   <div class="route-markers-container" *ngIf="isRoute">
     <h3>Points in Route</h3>
+    <p>click on point in list to remove</p>
     <ul>
-      <li *ngFor="let t of tours[0].points; let i = index" (click)="deleteTourPoint(t, i)">Marker {{i}}</li>
+      <li *ngFor="let t of tours[0].points; let i = index" (click)="deleteTourPoint(t, i)">Point {{i}}</li>
     </ul>
   </div>
-  <div class="driver-tours-container" *ngIf="isSentToDriver">
+  <div class="route-markers-container" *ngIf="isSentToDriver">
     <h3>Route Sent to Driver: {{drivers[0].name}}</h3>
     <ul>
-      <li *ngFor="let t of tours[0].points; let i = index" (click)="deleteTourPoint(t, i)">Marker {{i}}</li>
+      <li *ngFor="let t of tours[0].points; let i = index">Marker {{i}}</li>
     </ul>
   </div>
 </div>

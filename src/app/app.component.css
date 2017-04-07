@@ -4,8 +4,11 @@
 }
 .sebm-google-map-container {
   height: 500px;
+}
 
-
+.route-markers-container ul {
+  list-style-type: none;
+  cursor: pointer;
 }
 
 .map-controls-container {
