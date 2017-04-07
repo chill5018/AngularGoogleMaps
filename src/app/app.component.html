@@ -1,28 +1,68 @@
-<h1>{{title}}</h1>
+<div class="container row title-row">
+  <h1>Angular Google Maps Example</h1>
+</div>
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<sebm-google-map
-      [latitude]="lat"
-      [longitude]="lng"
-      [zoom]="zoom"
-      [disableDefaultUI]="false"
-      [zoomControl]="false"
-      (mapClick)="mapClicked($event)">
+<div class="col-md-6 map-container">
+  <sebm-google-map
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
 
-<sebm-google-map-marker
-         *ngFor="let m of markers; let i = index"
-         (markerClick)="clickedMarker(m.label, i)"
-         [latitude]="m.lat"
-         [longitude]="m.lng"
-         [label]="m.label"
-         [markerDraggable]="m.draggable"
-         (dragEnd)="markerDragEnd(m, $event)">
+  <sebm-google-map-marker
+  *ngFor="let m of markers; let i = index"
+  (markerClick)="clickedMarker(m.label, i)"
+  [latitude]="m.lat"
+  [longitude]="m.lng"
+  [label]="m.label"
+  [markerDraggable]="m.draggable"
+  (dragEnd)="markerDragEnd(m, $event)">
 
-       <sebm-google-map-info-window>
-         <strong>InfoWindow content</strong>
-       </sebm-google-map-info-window>
+  <sebm-google-map-info-window>
+    <strong>InfoWindow content</strong>
+  </sebm-google-map-info-window>
 
-     </sebm-google-map-marker>
+</sebm-google-map-marker>
 
-   </sebm-google-map>
+<sebm-google-map-polyline *ngIf="isRoute">
+  <sebm-google-map-polyline-point
+  *ngFor="let m of tours[0].points; let i = index"
+  [latitude]="m.lat"
+  [longitude]="m.lng">
+</sebm-google-map-polyline-point>
+</sebm-google-map-polyline>
+
+</sebm-google-map>
+
+</div>
+
+<div class="col-md-6 map-controls-container">
+  <button class="btn btn-danger" type="button" name="button" (click)="clearAllMarkers()">Clear All Markers</button>
+  <button class="btn btn-danger" type="button" name="button" (click)="clearMapData()">Clear Map</button>
+  <button class="btn" type="button" name="button" (click)="editMarkers()">Edit Markers</button>
+  <button class="btn btn-primary" type="button" name="button" (click)="createNewTour()">Create a Tour</button>
+  <button class="btn btn-primary" type="button" name="button" (click)="sendTourToDriver()">Send Tour to Driver</button>
+
+  <div class="route-markers-container" *ngIf="isEditing">
+    <h3>Markers on Map</h3>
+    <ul>
+      <li *ngFor="let m of markers; let i = index" (click)="deleteMarker(m, i)">Marker {{i}} {{m.label}}</li>
+    </ul>
+  </div>
+  <div class="route-markers-container" *ngIf="isRoute">
+    <h3>Points in Route</h3>
+    <ul>
+      <li *ngFor="let t of tours[0].points; let i = index" (click)="deleteTourPoint(t, i)">Marker {{i}}</li>
+    </ul>
+  </div>
+  <div class="driver-tours-container" *ngIf="isSentToDriver">
+    <h3>Route Sent to Driver: {{drivers[0].name}}</h3>
+    <ul>
+      <li *ngFor="let t of tours[0].points; let i = index" (click)="deleteTourPoint(t, i)">Marker {{i}}</li>
+    </ul>
+  </div>
+</div>
